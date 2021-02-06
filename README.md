@@ -3,9 +3,9 @@
 
 ## Usage
 ```
-python basic.py x.fasta
+python basic.py fasta_file
 ```
 **リダイレクトをつければテキスト出力もできます。**
 ```
-python basic.py x.fasta > x.txt
+python basic.py fasta_file > fasta_file.txt
 ```
