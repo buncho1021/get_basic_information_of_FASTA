@@ -1,6 +1,6 @@
 # get-basic-information-of-FASTA
 
-_fastaファイルの基礎情報を出力するコードです。_
+**fastaファイルの基礎情報を出力するコードです。**
 
 ```
 python basic.py *.fasta
