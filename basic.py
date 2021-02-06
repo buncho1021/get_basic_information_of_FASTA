@@ -5,9 +5,11 @@ from Bio import SeqIO
 class get_basic:
     def __init__(self, file_path=None):
         self.file_path = file_path
+        self.Sseqlen, self.Cseqlen = [], [],
+        self.N, self.GC, self.gap = 0, 0, 0
     
     def main(self):
-        self.Sseqlen, self.Cseqlen, self.N, self.GC, self.gap=[], [], 0, 0, 0
+        
         for line in SeqIO.parse(self.file_path, "fasta"):
             sequence = line.seq
             len_sequence = len(sequence)
@@ -34,7 +36,7 @@ class get_basic:
         print("Number of gaps\t",self.gap)
         print("Number of Ns\t",self.N,"\n")
         if len(self.Cseqlen)!=0:
-            print("Max contig length\t",np.max(self.Cseqlen))#scaffoldを構成するcontigは考慮していません。
+            print("Max contig length\t",np.max(self.Cseqlen))#scaffoldを構成するcontigは考慮していません。update予定
             print("Minmum contig length\t",np.min(self.Cseqlen))
             print("Mean contig length\t",round(np.sum(self.Cseqlen)/len(self.Cseqlen), 2))
             print("Median contig length\t",np.median(self.Cseqlen),"\n")
