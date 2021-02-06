@@ -29,7 +29,7 @@ def main(file_path):
     print("Number of gaps\t", gap)
     print("Number of Ns\t", N, "\n")
     if len(Cseqlen) !=0:
-        print("Max contig length\t", np.max(Cseqlen))#scaffoldを構成するcontigは考慮していません。
+        print("Max contig length\t", np.max(Cseqlen))#scaffoldを構成するcontigは考慮していません。update予定
         print("Minmum contig length\t", np.min(Cseqlen))
         print("Mean contig length\t", round(np.mean(Cseqlen), 2))
         print("Median contig length\t", np.median(Cseqlen),"\n")
@@ -44,9 +44,4 @@ def main(file_path):
 if __name__ == "__main__":
     file_path=argv[1]
     main(file_path)
-    
-    
-    
-    
-    
     
