@@ -1,47 +1,59 @@
-from sys import argv
+import sys
 import numpy as np
 from Bio import SeqIO
 
-def main(file_path):
-    Sseqlen, Cseqlen, N, GC, gap=[], [], 0, 0, 0
-    for line in SeqIO.parse(file_path, "fasta"):
-        sequence = line.seq.lower() #小文字にする
-        len_sequence = len(sequence)
-        if "n" in sequence:#scaffold
-            N   += sequence.count("n")
-            Sseqlen += [len_sequence]
-            for j in range(1, len_sequence):#gap counting
-                if sequence[j-1] != "n" and sequence[j] == "n":
-                    gap += 1   
-        else:#contig
-            Cseqlen += [len_sequence]
-        GC  += sequence.count("g") + sequence.count("c")
-    length = Sseqlen + Cseqlen ;length.sort(reverse=True)
-    sum_length = np.sum(length)
+class get_basic:
+    def __init__(self, file_path=None):
+        self.file_path = file_path
+    
+    def main(self):
+        self.Sseqlen, self.Cseqlen, self.N, self.GC, self.gap=[], [], 0, 0, 0
+        for line in SeqIO.parse(self.file_path, "fasta"):
+            sequence = line.seq
+            len_sequence = len(sequence)
+            if "n" in sequence.lower():#scaffold
+                self.Sseqlen += [len_sequence]
+                for j in range(1, len_sequence):
+                    if sequence[j-1]!="N" and sequence[j]=="N":
+                        self.gap += 1  
+            else:#contig
+                self.Cseqlen += [len_sequence]
+            self.N   += sequence.lower().count("n")
+            self.GC  += sequence.lower().count("g") + sequence.lower().count("c")
+        self.length = self.Sseqlen + self.Cseqlen ;self.length.sort(reverse=True)
+        self.sum_length = np.sum(self.length)
 
-    lcum, half = np.cumsum(length), sum_length*.5
-    N50 = length[np.where(lcum == lcum[lcum >= half][0])[0][0]]
-    L50 = len(lcum[lcum <= half]) + 1
+        lcum, half = np.cumsum(self.length), self.sum_length*.5
+        self.N50 = self.length[np.where(lcum == lcum[lcum >= half][0])[0][0]]
+        self.L50 = len(lcum[lcum <= half]) + 1
 
-    print("Total length\t", "{:,}".format(sum_length))
-    print("Number of contigs\t", len(length) + gap)
-    print("Number of scaffolds\t", len(Sseqlen))
-    print("Number of gaps\t", gap)
-    print("Number of Ns\t", N, "\n")
-    if len(Cseqlen) !=0:
-        print("Max contig length\t", np.max(Cseqlen))#scaffoldを構成するcontigは考慮していません。update予定
-        print("Minmum contig length\t", np.min(Cseqlen))
-        print("Mean contig length\t", round(np.mean(Cseqlen), 2))
-        print("Median contig length\t", np.median(Cseqlen),"\n")
-    print(f'N50\t{N50}\nL50\t{L50}')
-    print("GC content\t",round(GC/sum_length, 3),'\n')
-    if len(Sseqlen) != 0:
-        print("Max scaffold length\t", np.max(Sseqlen))
-        print("Minmum scaffold length\t", np.min(Sseqlen))
-        print("Mean scaffold length\t", round(np.mean(Sseqlen), 2))
-        print("Median scaffold length\t", np.median(Sseqlen))
+    def printer(self):
+        print("Total length\t","{:,}".format(self.sum_length))
+        print("Number of contigs\t",len(self.length) + self.gap)
+        print("Number of scaffolds\t",len(self.Sseqlen))
+        print("Number of gaps\t",self.gap)
+        print("Number of Ns\t",self.N,"\n")
+        if len(self.Cseqlen)!=0:
+            print("Max contig length\t",np.max(self.Cseqlen))#scaffoldを構成するcontigは考慮していません。
+            print("Minmum contig length\t",np.min(self.Cseqlen))
+            print("Mean contig length\t",round(np.sum(self.Cseqlen)/len(self.Cseqlen), 2))
+            print("Median contig length\t",np.median(self.Cseqlen),"\n")
+        print("N50\t", self.N50)
+        print("L50\t", self.L50)
+        print("GC content\t",round(self.GC/self.sum_length, 3),'\n')
+        if len(self.Sseqlen) != 0 :
+            print("Max scaffold length\t",np.max(self.Sseqlen))
+            print("Minmum scaffold length\t",np.min(self.Sseqlen))
+            print("Mean scaffold length\t",np.sum(self.Sseqlen)/len(self.Sseqlen))
+            print("Median scaffold length\t",np.median(self.Sseqlen))
 
 if __name__ == "__main__":
-    file_path=argv[1]
-    main(file_path)
+    instance = get_basic(file_path=sys.argv[1])
+    instance.main() ;instance.printer()
+    
+    
+    
+    
+    
+    
     
