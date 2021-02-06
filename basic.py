@@ -2,9 +2,9 @@ from sys import argv
 import numpy as np
 from Bio import SeqIO
 
-def main():
+def main(file_path):
     Sseqlen, Cseqlen, N, GC, gap=[], [], 0, 0, 0
-    for line in SeqIO.parse(argv[1], "fasta"):
+    for line in SeqIO.parse(file_path, "fasta"):
         sequence = line.seq.lower() #小文字にする
         len_sequence = len(sequence)
         if "n" in sequence:#scaffold
@@ -42,4 +42,11 @@ def main():
         print("Median scaffold length\t", np.median(Sseqlen))
 
 if __name__ == "__main__":
-    main()
+    file_path=argv[1]
+    main(file_path)
+    
+    
+    
+    
+    
+    
