@@ -9,7 +9,6 @@ class get_basic:
         self.N, self.GC, self.gap = 0, 0, 0
     
     def main(self):
-        
         for line in SeqIO.parse(self.file_path, "fasta"):
             sequence = line.seq
             len_sequence = len(sequence)
