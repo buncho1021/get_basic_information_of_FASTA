@@ -50,11 +50,4 @@ class get_basic:
 
 if __name__ == "__main__":
     instance = get_basic(file_path=sys.argv[1])
-    instance.main() ;instance.printer()
-    
-    
-    
-    
-    
-    
-    
+    instance.main() ;instance.printer()  
