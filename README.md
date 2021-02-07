@@ -5,7 +5,7 @@
 ```
 python basic.py fasta_file
 ```
-**リダイレクトをつければテキスト出力もできます。**
+**リダイレクトをつければテキスト出力できます。**
 ```
 python basic.py fasta_file > fasta_file.txt
 ```
