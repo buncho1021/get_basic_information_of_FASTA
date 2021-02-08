@@ -2,7 +2,7 @@ import sys
 import numpy as np
 from Bio import SeqIO
 
-class get_basic:
+class MyClass:
     def __init__(self, file_path=None):
         self.file_path = file_path
         self.Sseqlen, self.Cseqlen = [], [],
@@ -49,5 +49,5 @@ class get_basic:
             print("Median scaffold length\t",　np.median(self.Sseqlen))
 
 if __name__ == "__main__":
-    instance = get_basic(file_path=sys.argv[1])
+    instance = MyClass(file_path=sys.argv[1])
     instance.main() ;instance.printer()  
