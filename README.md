@@ -6,9 +6,9 @@ $ pip install -r requirements.txt
 ```
 ## Usage
 ```
-python basic.py fasta_file
+$ python basic.py fasta_file
 ```
 **リダイレクトをつければテキスト出力できます。**
 ```
-python basic.py fasta_file > fasta_file.txt
+$ python basic.py fasta_file > fasta_file.txt
 ```
