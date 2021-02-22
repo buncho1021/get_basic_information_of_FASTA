@@ -2,7 +2,7 @@
 **fastaファイルの基礎情報を出力するスクリプト**
 ## installation
 ```
-$ pip install -r requirements.txt
+$ pip install -r requirements.txt #condaでのinstallも可
 ```
 ## Usage
 ```
